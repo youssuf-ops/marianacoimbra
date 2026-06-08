@@ -2,26 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --rose-gold: #C9A08A;
+    --blush: #F2D4D0;
+    --warm-white: #FFF8F6;
+    --charcoal: #1A1A1A;
+    --background: #FFF8F6;
+    --foreground: #1A1A1A;
+    --border: rgba(201,160,138,0.2);
+    --input: rgba(201,160,138,0.2);
+    --ring: #C9A08A;
+    --primary: #C9A08A;
+    --primary-foreground: #ffffff;
+    --radius: 0.625rem;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--warm-white);
+    color: var(--charcoal);
+    font-family: var(--font-lato), 'Lato', sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .font-playfair {
+    font-family: var(--font-playfair), 'Playfair Display', serif;
+  }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  [data-reveal].visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes ping {
+    75%, 100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .animate-ping-slow {
+    animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2s ease-in-out infinite;
   }
 }
