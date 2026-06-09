@@ -129,7 +129,7 @@ export default function Page() {
     return () => observer.disconnect();
   }, []);
 
-  // Rotação automática da galeria após 30s sem interacção
+  // Rotação automática da galeria (30s)
   const trocarGaleria = useCallback(() => {
     setGaleriaVisible(false);
     setTimeout(() => {
@@ -158,7 +158,6 @@ export default function Page() {
       window.addEventListener(e, resetTimer, { passive: true }),
     );
 
-    // Inicia o timer
     timer = setTimeout(trocarGaleria, 30000);
 
     return () => {
@@ -173,6 +172,7 @@ export default function Page() {
     e.preventDefault();
     setSent(true);
     setTimeout(() => setSent(false), 3000);
+    // Nota: Adicione aqui a lógica real de envio (API route) se necessário
   };
 
   return (
@@ -305,7 +305,6 @@ export default function Page() {
           }}
         />
 
-        {/* Badge localização */}
         <div
           data-reveal
           className="absolute left-0 right-0 mx-auto flex w-fit"
@@ -519,7 +518,6 @@ export default function Page() {
             >
               Galeria
             </h2>
-            {/* Indicador de grupo */}
             <div className="mt-4 flex items-center justify-center gap-2">
               <div
                 style={{
@@ -566,7 +564,6 @@ export default function Page() {
               </div>
             ))}
           </div>
-          {/* Botões manuais */}
           <div className="mt-8 flex items-center justify-center gap-3">
             <button
               onClick={() => {
@@ -709,7 +706,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* CONTACTO */}
+      {/* CONTACTO - com mapa corrigido e responsivo */}
       <section
         id="contacto"
         className="relative overflow-hidden py-24 md:py-32"
@@ -774,7 +771,6 @@ export default function Page() {
                   <MessageCircle size={16} />
                   WhatsApp
                 </a>
-                {/* Instagram pessoal */}
                 <a
                   href={INSTAGRAM_PESSOAL}
                   target="_blank"
@@ -789,7 +785,6 @@ export default function Page() {
                   <InstagramIcon size={16} />
                   @marianacoimbranails
                 </a>
-                {/* Instagram revenda */}
                 <a
                   href={INSTAGRAM_REVENDA}
                   target="_blank"
@@ -805,28 +800,56 @@ export default function Page() {
                   @revendahitnails_castelobranco
                 </a>
               </div>
-              {/* Mapa */}
+
+              {/* Mapa corrigido - totalmente responsivo */}
               <div
                 data-reveal
                 className="mt-8 overflow-hidden rounded-2xl"
                 style={{ animationDelay: "400ms" }}
               >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24184.825!2d-7.4975!3d39.8228!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3b5c3b5c3b5c3b%3A0x1!2sCastelo%20Branco%2C%20Portugal!5e0!3m2!1spt!2spt!4v1"
-                  width="100%"
-                  height="220"
+                <div className="relative aspect-video w-full">
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3052.178564742084!2d-7.499022684368678!3d39.82273297942422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd3b2e8d9a6b4b4b%3A0x8e2b8a9f0c1d2e3f!2sRua%20Diogo%20da%20Fonseca%2C%206%2C%206000-184%20Castelo%20Branco!5e0!3m2!1spt!2spt!4v1712345678901!5m2!1spt!2spt"
+                    width="100%"
+                    height="100%"
+                    style={{
+                      border: 0,
+                      display: "block",
+                      filter: "grayscale(20%) contrast(1.05)",
+                    }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Mariana Coimbra Nails — Rua Diogo da Fonseca 6, Castelo Branco"
+                  />
+                </div>
+                <a
+                  href="https://maps.google.com/?q=Rua+Diogo+da+Fonseca+6,+6000-184+Castelo+Branco"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex items-center gap-2 text-xs uppercase tracking-widest transition-opacity hover:opacity-80"
                   style={{
-                    border: 0,
-                    display: "block",
-                    filter: "grayscale(20%) contrast(1.05)",
+                    color: "#F2D4D0",
+                    textDecoration: "none",
+                    letterSpacing: "0.15em",
                   }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Localização — Castelo Branco"
-                />
+                >
+                  <svg
+                    width="13"
+                    height="13"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  Rua Diogo da Fonseca, 6 · Castelo Branco
+                </a>
               </div>
             </div>
+
             <div data-reveal style={{ animationDelay: "150ms" }}>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-1.5">
@@ -925,7 +948,7 @@ export default function Page() {
               key={l.href}
               href={l.href}
               style={{ color: "rgba(26,26,26,0.4)", textDecoration: "none" }}
-              className="hover:text-[#C9A08A] transition-colors"
+              className="transition-colors hover:text-[#C9A08A]"
             >
               {l.label}
             </a>
